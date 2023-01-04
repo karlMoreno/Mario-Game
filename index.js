@@ -67,14 +67,7 @@ addEventListener('keydown', ({ keyCode }) => {
             break
         case 87:
             console.log('Up')
-            if(player.position.y > 0){
-                player.velocity.y -= 20
-            }else{
-                player.velocity.y = 0
-
-            }
-            
-            
+            player.velocity.y -= 20
             break
     } 
 })
