@@ -34,6 +34,12 @@ class Player {
         } else{
             this.velocity.y = 0
         }
+
+        if(player.position.y < 0){
+            player.velocity.y = 0
+            player.position.y = 0
+        }
+
     }
 }
 
@@ -46,3 +52,29 @@ function animate() {
 }
 
 animate()
+
+
+addEventListener('keydown', ({ keyCode }) => {
+    switch(keyCode) {
+        case 65:
+            console.log('Left')
+            break
+        case 83:
+            console.log('Down')
+            break
+        case 68:
+            console.log('Right')
+            break
+        case 87:
+            console.log('Up')
+            if(player.position.y > 0){
+                player.velocity.y -= 20
+            }else{
+                player.velocity.y = 0
+
+            }
+            
+            
+            break
+    } 
+})
