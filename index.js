@@ -26,6 +26,7 @@ class Player {
     }
 
     update() {
+        this.position.x += this.velocity.x
         this.position.y += this.velocity.y
         this.draw()
 
@@ -44,11 +45,26 @@ class Player {
 }
 
 const player = new Player()
+const keys = {
+    right: {
+        pressed: false
+    },
+    left: {
+        pressed: false
+    }
+}
 
 function animate() {
     requestAnimationFrame(animate)
     c.clearRect(0,0,canvas.width,canvas.height)
     player.update()
+    if(keys.right.pressed) {
+        player.velocity.x = 5
+    }else if(keys.left.pressed) {
+        player.velocity.x = -5
+    }else{
+        player.velocity.x = 0
+    }
 }
 
 animate()
@@ -58,12 +74,34 @@ addEventListener('keydown', ({ keyCode }) => {
     switch(keyCode) {
         case 65:
             console.log('Left')
+            keys.left.pressed = true
             break
         case 83:
             console.log('Down')
             break
         case 68:
             console.log('Right')
+            keys.right.pressed = true
+
+            break
+        case 87:
+            console.log('Up')
+            player.velocity.y -= 20
+            break
+    } 
+})
+addEventListener('keyup', ({ keyCode }) => {
+    switch(keyCode) {
+        case 65:
+            console.log('Left')
+            keys.left.pressed = false
+            break
+        case 83:
+            console.log('Down')
+            break
+        case 68:
+            console.log('Right')
+            keys.right.pressed = false
             break
         case 87:
             console.log('Up')
