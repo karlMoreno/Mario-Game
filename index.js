@@ -41,14 +41,22 @@ class Player {
             player.position.y = 0
         }
 
+        if(player.width > canvas.width){
+            player.position.x = canvas.width - player.width
+            player.velocity.x = 0
+        }else if(player.position.x <= 0){
+            player.velocity.x = 0
+            player.position.x = 0
+        }
+
     }
 }
 
 class Platform {
     constructor() {
         this.position = {
-            x: 200,
-            y: 100
+            x: 400,
+            y: 300
         }
         this.width = 200
         this.height = 20
@@ -86,6 +94,14 @@ function animate() {
         player.velocity.x = -5
     }else{
         player.velocity.x = 0
+    }
+    if(
+        player.position.y + player.height <= platform.position.y &&
+        player.position.y + player.height + player.velocity.y >= platform.position.y &&
+        player.position.x + player.width >= platform.position.x - platform.width &&
+        player.position.x - player.width <= platform.position.x + platform.width
+        ){
+        player.velocity.y = 0
     }
 }
 
