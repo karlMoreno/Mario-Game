@@ -41,13 +41,7 @@ class Player {
             player.position.y = 0
         }
 
-        if(player.width > canvas.width){
-            player.position.x = canvas.width - player.width
-            player.velocity.x = 0
-        }else if(player.position.x <= 0){
-            player.velocity.x = 0
-            player.position.x = 0
-        }
+        
 
     }
 }
@@ -88,12 +82,19 @@ function animate() {
     player.update()
     platform.draw()
 
-    if(keys.right.pressed) {
+    if(keys.right.pressed && player.position.x < 800) {
         player.velocity.x = 5
-    }else if(keys.left.pressed) {
+    }else if(keys.left.pressed && player.position.x > 100) {
         player.velocity.x = -5
     }else{
+
         player.velocity.x = 0
+
+        if(keys.right.pressed){
+            platform.position.x -= 5
+        } else if (keys.left.pressed) {
+            platform.position.x += 5
+        }
     }
     if(
         player.position.y + player.height <= platform.position.y &&
